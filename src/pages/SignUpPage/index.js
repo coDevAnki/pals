@@ -1,7 +1,11 @@
 import React from "react";
-
-const SignUpPage = () => {
-  return <div>SignUpPage</div>;
+import { RegisterUI } from "../../layout";
+const RegisterPage = () => {
+  return (
+    <div>
+      <RegisterUI />
+    </div>
+  );
 };
 
-export default SignUpPage;
+export default RegisterPage;

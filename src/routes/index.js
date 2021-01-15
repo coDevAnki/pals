@@ -1,4 +1,9 @@
-import { CreateContactsPage, HomePage, SignInPage, SignUpPage } from "../pages";
+import {
+  CreateContactsPage,
+  HomePage,
+  RegisterPage,
+  SignInPage,
+} from "../pages";
 
 const routes = [
   { path: "/", component: HomePage, title: "Home" },
@@ -7,7 +12,7 @@ const routes = [
     component: CreateContactsPage,
     title: "Create Contact",
   },
-  { path: "/signup", component: SignUpPage, title: "Register" },
+  { path: "/register", component: RegisterPage, title: "Register" },
   { path: "/signin", component: SignInPage, title: "Log in" },
 ];
 

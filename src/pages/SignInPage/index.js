@@ -1,7 +1,12 @@
 import React from "react";
+import { LogInUI } from "../../layout";
 
 const SignInPage = () => {
-  return <div>SignInPage</div>;
+  return (
+    <div>
+      <LogInUI />
+    </div>
+  );
 };
 
 export default SignInPage;
