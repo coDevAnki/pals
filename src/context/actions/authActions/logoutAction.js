@@ -1,8 +1,9 @@
 import { LOGOUT } from "../../actionTypes";
 
-const loginAction = (dispatch) => {
+const logoutAction = (dispatch, history) => {
   localStorage.removeItem("token");
   dispatch({ type: LOGOUT });
+  history.push("/signin");
 };
 
-export default loginAction;
+export default logoutAction;

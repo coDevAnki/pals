@@ -3,10 +3,11 @@ import styled from "styled-components";
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  border: 1px solid;
   position: relative;
   margin: auto;
-  width: 70%;
+  margin-top: 50px;
+  width:40%;
+  justify-content:center;
 `;
 
 export default FormContainer;

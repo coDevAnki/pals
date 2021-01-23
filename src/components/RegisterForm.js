@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useField } from "../custom-hooks";
 import serverSideValidate from "../helpers/serverSideValidate";
-import { Button, Input } from "./reusable-components";
+import { Button, FormHeader, FormInput, Segment } from "./reusable-components";
 import { FormContainer } from "./styled-compoents";
+import {useAuthState } from "../context";
 
-const RegisterForm = ({ onSubmit }) => {
+  const RegisterForm = ({ onSubmit }) => {
+  const {loading} = useAuthState()
   const {
     field: usernameField,
     onChange: usernameOnChange,
@@ -51,7 +54,7 @@ const RegisterForm = ({ onSubmit }) => {
     onChange: passwordOnChange,
     meta: passwordMeta,
   } = useField({
-    validateFn: (val) => (val.length < 6 ? "at least 8 char needed" : ""),
+    validateFn: (val) => (val.length < 8 ? "at least 8 char needed" : ""),
   });
 
   console.log(usernameMeta, emailMeta);
@@ -63,64 +66,67 @@ const RegisterForm = ({ onSubmit }) => {
     passwordMeta.isValid;
 
   return (
-    <FormContainer
-      onSubmit={(e) =>
-        onSubmit(e)({
-          ...usernameField,
-          ...firstnameField,
-          ...lastnameField,
-          ...emailField,
-          ...passwordField,
-        })
-      }
-    >
-      <Input
-        label="User Name"
-        id="username"
-        name="username"
-        onChange={usernameOnChange}
-        type="text"
-        placeholder="userName"
-        error={usernameMeta.error}
-      />
-      <Input
-        label="First Name"
-        id="firstname"
-        name="first_name"
-        onChange={firstnameOnChange}
-        type="text"
-        placeholder="firstName"
-        error={firstnameMeta.error}
-      />
-      <Input
-        label="Last Name"
-        id="lastname"
-        name="last_name"
-        onChange={lastnameOnChange}
-        type="text"
-        placeholder="lastname"
-        error={lastnameMeta.error}
-      />
-      <Input
-        label="Email"
-        id="email"
-        name="email"
-        onChange={emailOnChange}
-        type="text"
-        placeholder="email"
-        error={emailMeta.error}
-      />
-      <Input
-        label="Password"
-        id="password"
-        name="password"
-        onChange={passwordOnChange}
-        type="text"
-        placeholder="password"
-        error={passwordMeta.error}
-      />
-      <Button disabled={!areAllValid}>submit</Button>
-    </FormContainer>
+    <>
+      <FormContainer
+        onSubmit={(e) =>
+          onSubmit(e)({
+            ...usernameField,
+            ...firstnameField,
+            ...lastnameField,
+            ...emailField,
+            ...passwordField,
+          })
+        }
+      >
+        <FormHeader>Create New Contact</FormHeader>
+        <FormInput
+          label="User Name"
+          id="username"
+          name="username"
+          onChange={usernameOnChange}
+          type="text"
+          error={usernameMeta.error}
+          message={usernameMeta.message}
+        />
+        <FormInput
+          label="First Name"
+          id="firstname"
+          name="first_name"
+          onChange={firstnameOnChange}
+          type="text"
+          error={firstnameMeta.error}
+        />
+        <FormInput
+          label="Last Name"
+          id="lastname"
+          name="last_name"
+          onChange={lastnameOnChange}
+          type="text"
+          error={lastnameMeta.error}
+        />
+        <FormInput
+          label="Email"
+          id="email"
+          name="email"
+          onChange={emailOnChange}
+          type="text"
+          error={emailMeta.error}
+        />
+        <FormInput
+          label="Password"
+          id="password"
+          name="password"
+          onChange={passwordOnChange}
+          type="text"
+          error={passwordMeta.error}
+          message={passwordMeta.message}
+        />
+        <Button disabled={!areAllValid}>{loading?"Loading":"submit"}</Button>
+        <Segment>
+          already have an account? <Link to="/signin">Log in </Link>
+        </Segment>
+      </FormContainer>
+    </>
   );
 };
 
