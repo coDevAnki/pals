@@ -2,6 +2,7 @@ import Button from "./Button";
 import Clickable from "./Clickable";
 import FormHeader from "./FormHeader";
 import FormInput from "./FormInput";
+import Heading from "./Heading";
 import ImageThumb from "./ImageThumb";
 import Linked from "./Linked";
 import Segment from "./Segment";
@@ -15,4 +16,5 @@ export {
   ImageThumb,
   FormHeader,
   Segment,
+  Heading,
 };

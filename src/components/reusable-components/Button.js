@@ -9,7 +9,8 @@ const Button = styled.button`
   outline: none;
   color: white;
   font-size: 2.5rem;
-  width: 100%;
+  width: ${({ width }) => (width ? width : "100%")};
+  margin: ${({ margin }) => (margin ? margin : "")};
   cursor: pointer;
   transition: 0.5s ease all;
 
@@ -17,6 +18,7 @@ const Button = styled.button`
     background-color: lightsalmon;
   }
   &:disabled {
+    cursor: auto;
     background-color: peachpuff;
   }
 `;

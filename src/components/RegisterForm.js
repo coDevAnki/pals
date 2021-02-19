@@ -1,22 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthState } from "../context";
 import { useField } from "../custom-hooks";
-import serverSideValidate from "../helpers/serverSideValidate";
+import { serverSideUsernameValidate } from "../helpers/serverSideValidate";
+import { validateEmail, validatePassword } from "../helpers/validations";
 import { Button, FormHeader, FormInput, Segment } from "./reusable-components";
 import { FormContainer } from "./styled-compoents";
-import {useAuthState } from "../context";
 
-  const RegisterForm = ({ onSubmit }) => {
-  const {loading} = useAuthState()
+const RegisterForm = ({ onSubmit }) => {
+  const { loading } = useAuthState();
   const {
     field: usernameField,
     onChange: usernameOnChange,
     meta: usernameMeta,
   } = useField({
-    validateFn: async (val) => {
+    validateFn: (val) => {
       if (val.length < 4) return "at least 4 char needed";
-      let errors = await serverSideValidate({ username: val });
-      return Array.isArray(errors?.username) ? errors.username[0] : "";
+      return serverSideUsernameValidate(val);
     },
     debounceTime: 1000,
   });
@@ -26,7 +26,7 @@ import {useAuthState } from "../context";
     onChange: firstnameOnChange,
     meta: firstnameMeta,
   } = useField({
-    validateFn: (val) => (val.length < 2 ? "at least 4 char needed" : ""),
+    validateFn: (val) => (val.length < 2 ? "at least 2 char needed" : ""),
   });
 
   const {
@@ -34,7 +34,7 @@ import {useAuthState } from "../context";
     onChange: lastnameOnChange,
     meta: lastnameMeta,
   } = useField({
-    validateFn: (val) => (val.length < 2 ? "at least 4 char needed" : ""),
+    validateFn: (val) => (val.length < 2 ? "at least 2 char needed" : ""),
   });
 
   const {
@@ -42,10 +42,7 @@ import {useAuthState } from "../context";
     onChange: emailOnChange,
     meta: emailMeta,
   } = useField({
-    validateFn: async (val) => {
-      let errors = await serverSideValidate({ email: val });
-      return Array.isArray(errors?.email) ? errors.email[0] : "";
-    },
+    validateFn: validateEmail,
     debounceTime: 1000,
   });
 
@@ -54,11 +51,11 @@ import {useAuthState } from "../context";
     onChange: passwordOnChange,
     meta: passwordMeta,
   } = useField({
-    validateFn: (val) => (val.length < 8 ? "at least 8 char needed" : ""),
+    validateFn: validatePassword,
+    debounceTime: 1000,
   });
 
-  console.log(usernameMeta, emailMeta);
-  const areAllValid =
+  const allValid =
     usernameMeta.isValid &&
     firstnameMeta.isValid &&
     lastnameMeta.isValid &&
@@ -86,7 +83,7 @@ import {useAuthState } from "../context";
           onChange={usernameOnChange}
           type="text"
           error={usernameMeta.error}
-          message={usernameMeta.message}
+          message={usernameMeta.message || usernameMeta.checking}
         />
         <FormInput
           label="First Name"
@@ -121,7 +118,9 @@ import {useAuthState } from "../context";
           error={passwordMeta.error}
           message={passwordMeta.message}
         />
-        <Button disabled={!areAllValid}>{loading?"Loading":"submit"}</Button>
+        <Button disabled={!allValid || loading}>
+          {loading ? "Loading..." : "submit"}
+        </Button>
         <Segment>
           already have an account? <Link to="/signin">Log in </Link>
         </Segment>

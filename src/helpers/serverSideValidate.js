@@ -1,22 +1,20 @@
 import axiosInstance from "../api/axios";
 
-const MockRegister = {
-  username: "xx",
-  // first_name: "xxx",
-  // last_name: "xxx",
+const MockRegister = (data) => ({
+  username: data.username || "",
+  first_name: "xx",
+  last_name: "xx",
   password: "xxxxxxxx",
-  // email: "xxx@xmail.com",
-};
+});
 
-const serverSideValidate = async (toValidateData) => {
+export const serverSideUsernameValidate = async (dataToValidate) => {
   try {
-    await axiosInstance.post("/auth/register", {
-      ...MockRegister,
-      ...toValidateData,
+    const data = await axiosInstance().post("/auth/register", {
+      ...MockRegister({ username: dataToValidate }),
     });
-  } catch (e) {
-    return e.response?.data;
+    return data.response;
+  } catch (err) {
+    const errors = err?.response?.data;
+    if (errors.username) return errors.username.join("");
   }
 };
-
-export default serverSideValidate;

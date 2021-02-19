@@ -1,20 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthState } from "../context";
 import { useField } from "../custom-hooks";
 import { Button, FormHeader, FormInput, Segment } from "./reusable-components";
 import { FormContainer } from "./styled-compoents";
-import {useAuthState } from "../context";
 
 const LoginForm = ({ onSubmit }) => {
-  const {loading} = useAuthState()
-  const { field: usernameField, onChange: usernameOnChange } = useField({
-    validateFn: (val) => val.length < 2,
+  const {
+    loginUser: { loading },
+  } = useAuthState();
+  const {
+    field: usernameField,
+    onChange: usernameOnChange,
+    meta: usernameMeta,
+  } = useField({
+    validateFn: (val) => val.length < 1,
   });
 
-  const { field: passwordField, onChange: passwordOnChange } = useField({
-    validateFn: (val) => val.length < 2,
+  const {
+    field: passwordField,
+    onChange: passwordOnChange,
+    meta: passwordMeta,
+  } = useField({
+    validateFn: (val) => val.length < 1,
   });
-
+  const allValid = usernameMeta.isValid && passwordMeta.isValid;
   return (
     <FormContainer
       onSubmit={(e) => onSubmit(e)({ ...usernameField, ...passwordField })}
@@ -35,7 +45,9 @@ const LoginForm = ({ onSubmit }) => {
         type="text"
         label="Password"
       />
-      <Button>{loading?"Loading":"submit"}</Button>
+      <Button disabled={!allValid || loading}>
+        {loading ? "Loading..." : "submit"}
+      </Button>
       <Segment>
         need an account ? <Link to="/register">Register</Link>
       </Segment>

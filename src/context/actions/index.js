@@ -9,6 +9,7 @@ import createContactAction from "./contactsActions/createContactAction";
 import deleteContactAction from "./contactsActions/deleteContactAction";
 import editContactAction from "./contactsActions/editContactAction";
 import getContactsAction from "./contactsActions/getContactsAction";
+import searchContactsAction from "./contactsActions/searchContactsAction";
 export {
   registerAction,
   loginAction,
@@ -21,4 +22,5 @@ export {
   clearEditContactAction,
   clearContactsAction,
   clearDeleteContactAction,
+  searchContactsAction,
 };

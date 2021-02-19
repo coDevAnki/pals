@@ -81,10 +81,18 @@ const useField = ({
 
   const onChange = (e) => {
     const {
-      target: { name, value },
+      target: { name, value, checked },
     } = e;
-    setValue(value);
-    setField({ [name]: value });
+
+    if (e.target.type === "checkbox") {
+      setValue(checked);
+      setField({ [name]: checked });
+      return;
+    }
+
+    let trimmedValue = value.trim();
+    setValue(trimmedValue);
+    setField({ [name]: trimmedValue });
   };
 
   return { value, field, onChange, meta };

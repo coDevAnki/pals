@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 export const InputField = styled.div`
   width: 100%;
+
   input,
   select {
     box-sizing: border-box;
@@ -11,28 +12,10 @@ export const InputField = styled.div`
     font-size: 2.3rem;
     width: 100%;
   }
-  input[type="checkbox"] {
-    position: relative;
-    width: 0%;
-    height: 0%;
-    &::after {
-      content: "";
-      position: absolute;
-      height: 23px;
-      width: 23px;
-      /* border-radius: 50%; */
-      border: 1px solid;
-      top: 0;
-      left: 1rem;
-    }
-    &:checked::after {
-      background-color: cornflowerblue;
-    }
-  }
 
   &::after {
     content: "";
-    height: 3rem;
+    min-height: 3rem;
     display: block;
     width: 100%;
     font-size: 2rem;
@@ -49,12 +32,32 @@ export const InputField = styled.div`
     color: green;
     `}
   }
+  .custom-checkbox {
+    border: 1px solid grey;
+    width: 15px;
+    height: 15px;
+    color: white;
+    background-color: white;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 2.3rem;
+  }
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  input:checked + .custom-checkbox {
+    background-color: blue;
+  }
 `;
 
-export const FormLabel = styled.span`
+export const FormLabel = styled.div`
   font-size: 2.5rem;
   max-width: 100%;
+  display: inline;
 `;
+
 export const FormField = styled.span`
   display: flex;
   align-items: baseline;
@@ -66,9 +69,18 @@ export const FormField = styled.span`
 const FormInput = React.forwardRef(
   ({ label, error, message, ...props }, ref) => (
     <FormField type={props.type}>
-      {label && <FormLabel>{label}</FormLabel>}
+      {label && (
+        <FormLabel as="label" htmlFor={props.id || ""}>
+          {label}
+        </FormLabel>
+      )}
       <InputField error={error} message={message}>
         <input ref={ref} {...props} />
+        {props.type === "checkbox" && (
+          <label htmlFor={props.id || ""} className="custom-checkbox">
+            &#10004;
+          </label>
+        )}
       </InputField>
     </FormField>
   )

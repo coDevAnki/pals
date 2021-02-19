@@ -5,9 +5,9 @@ const Linked = styled(Link).attrs(({ to }) => ({
   to,
 }))`
   text-decoration: none;
-  font-size: 3rem;
-  color: black;
+  font-size: ${({ fz }) => fz || "2.75rem"};
   margin: 0 2rem;
+  color: ${({ color }) => color || "black"};
 `;
 
 export default Linked;

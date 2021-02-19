@@ -3,11 +3,10 @@ import styled from "styled-components";
 const FormHeaderContainer = styled.div`
   box-sizing: border-box;
   width: 100%;
-
   font-size: 3rem;
   font-weight: 500;
   color: dimgrey;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   border-bottom: 1px solid grey;
 `;
 const HeaderText = styled.span``;

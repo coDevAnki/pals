@@ -15,8 +15,10 @@ import {
   GET_CONTACTS_FAILURE,
   GET_CONTACTS_LOADING,
   GET_CONTACTS_SUCCESS,
+  SEARCH_CONTACTS,
 } from "../actionTypes";
 import initialContactsState from "../initialStates/initialContactsState";
+
 const contactsReducer = (state, { type, payload }) => {
   switch (type) {
     case CREATE_CONTACT_LOADING:
@@ -141,8 +143,8 @@ const contactsReducer = (state, { type, payload }) => {
           id: payload,
         },
       };
-    case EDIT_CONTACT_SUCCESS:
-    {  console.log(state);
+    case EDIT_CONTACT_SUCCESS: {
+      console.log(state);
       return {
         ...state,
         contacts: {
@@ -158,7 +160,8 @@ const contactsReducer = (state, { type, payload }) => {
           error: null,
           id: null,
         },
-      };}
+      };
+    }
     case EDIT_CONTACT_FAILURE:
       return {
         ...state,
@@ -175,6 +178,21 @@ const contactsReducer = (state, { type, payload }) => {
         editContact: {
           loading: false,
           error: null,
+        },
+      };
+    case SEARCH_CONTACTS:
+      console.log("heloo", payload);
+      return {
+        ...state,
+        contacts: {
+          ...state.contacts,
+          isSearchActive: !!payload.length ? true : false,
+          searchedData: !!payload.length
+            ? state.contacts.data.filter(
+                ({ first_name, last_name }) =>
+                  first_name.includes(payload) || last_name.includes(payload)
+              )
+            : [],
         },
       };
     default:

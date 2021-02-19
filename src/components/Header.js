@@ -3,10 +3,13 @@ import { useHistory } from "react-router-dom";
 import { useAuthDispatch, useAuthState, useContactsDispatch } from "../context";
 import { clearContactsAction, logoutAction } from "../context/actions";
 import { Clickable } from "./reusable-components";
+import SearchField from "./SearchField";
 import { HeaderContainer } from "./styled-compoents";
 
 const Header = () => {
-  const authState = useAuthState();
+  const {
+    loginUser: { currentUser },
+  } = useAuthState();
   const authDispatch = useAuthDispatch();
   const contactsDispatch = useContactsDispatch();
   const history = useHistory();
@@ -22,8 +25,9 @@ const Header = () => {
         <Clickable to="/">LOGO</Clickable>
       </nav>
 
-      {authState.currentUser ? (
+      {currentUser ? (
         <nav>
+          <SearchField />
           <Clickable icon="plus" to="/create-contacts">
             Add Contact
           </Clickable>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useContactsDispatch } from "../context";
-import { deleteContactAction, editContactAction } from "../context/actions";
+import { editContactAction } from "../context/actions";
 import { Clickable, ImageThumb } from "./reusable-components";
 import { ConatctSection, ContactContainer } from "./styled-compoents";
 
@@ -17,8 +17,6 @@ const ContactDetails = ({
 }) => {
   const contactsDispatch = useContactsDispatch();
 
-  const deleteContact = (id) => deleteContactAction(contactsDispatch, id);
-
   const editContact = (id, editedData) => {
     editContactAction(contactsDispatch, id, editedData);
   };
@@ -31,7 +29,7 @@ const ContactDetails = ({
           lastName={last_name}
           src={contact_picture}
         />
-        <Clickable width="200px" justify="space-between">
+        <Clickable width="200px">
           {first_name + " " + last_name}
           <Clickable
             icon="star"
@@ -40,15 +38,9 @@ const ContactDetails = ({
             onClick={() => editContact(id, { is_favorite: !is_favorite })}
           />
         </Clickable>
-      </ConatctSection>
-      <ConatctSection>
         <span>{country_code + " " + phone_number}</span>
         <Clickable width="20px" icon="edit" to={`edit/${id}`} />
-        <Clickable
-          width="20px"
-          onClick={() => deleteContact(id)}
-          icon="trash"
-        />
+        <Clickable width="20px" icon="trash" to={`/delete/${id}`} />
       </ConatctSection>
     </ContactContainer>
   );

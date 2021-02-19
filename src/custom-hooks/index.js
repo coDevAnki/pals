@@ -1,5 +1,7 @@
+import useClickOutside from "./useClickOutside";
 import useDebounce from "./useDebounce";
 import useField from "./useField";
 import useImageUpload from "./useImageUpload";
 import usePromise from "./usePromise";
-export { useField, usePromise, useDebounce, useImageUpload };
+
+export { useField, usePromise, useDebounce, useImageUpload, useClickOutside };

@@ -13,7 +13,6 @@ const createContactAction = async (dispatch, data, history) => {
     try {
       let res = await axiosInstance().post("/contacts/", {
         ...data,
-        is_favorite: data.is_favorite === "on",
         contact_picture: url,
       });
 

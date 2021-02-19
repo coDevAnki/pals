@@ -1,25 +1,17 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { Clickable, ImageThumb } from "./reusable-components";
 import { SliderContainer, SliderItem, SliderWrapper } from "./styled-compoents";
 
 const Slider = ({ data }) => {
-  const sliderRef = useRef();
+  const [num, setNum] = useState(0);
   const scrollLeft = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({
-        top: 0,
-        left: 200,
-        behavior: "smooth",
-      });
+    if (num <= Math.floor(data.length / 5)) {
+      setNum(num + 1);
     }
   };
   const scrollRight = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({
-        top: 0,
-        left: -200,
-        behavior: "smooth",
-      });
+    if (num >= Math.ceil((data.length * -1) / 5)) {
+      setNum(num - 1);
     }
   };
   if (!data?.length) {
@@ -27,10 +19,10 @@ const Slider = ({ data }) => {
   }
   return (
     <SliderWrapper>
-      <Clickable icon="caret-left" onClick={scrollLeft} />
-      <SliderContainer ref={sliderRef}>
+      <Clickable icon="caret-left" iconSize="3x" onClick={scrollLeft} />
+      <SliderContainer itemsCount={data.length}>
         {data.map(({ first_name, last_name, contact_picture }) => (
-          <SliderItem>
+          <SliderItem num={num}>
             <ImageThumb
               firstName={first_name}
               lastName={last_name}
@@ -40,7 +32,7 @@ const Slider = ({ data }) => {
           </SliderItem>
         ))}
       </SliderContainer>
-      <Clickable icon="caret-right" onClick={scrollRight} />
+      <Clickable icon="caret-right" iconSize="3x" onClick={scrollRight} />
     </SliderWrapper>
   );
 };

@@ -4,10 +4,12 @@ import { useAuthState } from "../../context";
 import { ContactsUI } from "../../layout";
 
 const HomePage = () => {
-  const authState = useAuthState();
+  const {
+    loginUser: { currentUser },
+  } = useAuthState();
   return (
     <div>
-      {authState.currentUser ? (
+      {currentUser ? (
         <ContactsUI />
       ) : (
         <>

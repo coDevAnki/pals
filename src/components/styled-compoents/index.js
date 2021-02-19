@@ -8,11 +8,12 @@ import {
   CreateContactContainer,
   CreateContactUIWrapper,
 } from "./CreateContactParts";
+import FlexWrapper from "./FlexWrapper";
 import FormContainer from "./FormContainer";
 import { HeaderContainer } from "./HeaderParts";
 import ImageOptions from "./ImageOptions";
+import { ModalBody, ModalContainer } from "./ModalParts";
 import { SliderContainer, SliderItem, SliderWrapper } from "./SliderParts";
-
 export {
   HeaderContainer,
   FormContainer,
@@ -26,4 +27,7 @@ export {
   ContactsListContainer,
   ContactContainer,
   ConatctSection,
+  ModalContainer,
+  ModalBody,
+  FlexWrapper,
 };

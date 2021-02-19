@@ -1,30 +1,28 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { Header } from "./components";
-import { AuthProvider, ContactsProvider } from "./context";
+import { useAuthState } from "./context";
 import routes from "./routes";
 
 const App = () => {
+  const {
+    loginUser: { currentUser },
+  } = useAuthState();
   return (
-    <div>
-      <AuthProvider>
-        <ContactsProvider>
-          <BrowserRouter>
-            <Header />
-            <Switch>
-              {routes.map(({ path, component: Component }, index) => (
-                <Route
-                  key={index}
-                  exact
-                  path={path}
-                  render={() => <Component />}
-                />
-              ))}
-            </Switch>
-          </BrowserRouter>
-        </ContactsProvider>
-      </AuthProvider>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Switch>
+        {routes.map(({ path, component: Component, needsAuth }, index) => (
+          <Route key={index} exact path={path}>
+            {needsAuth && currentUser === null ? (
+              <Redirect to="/signin" />
+            ) : (
+              <Component />
+            )}
+          </Route>
+        ))}
+      </Switch>
+    </BrowserRouter>
   );
 };
 

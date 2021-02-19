@@ -45,12 +45,14 @@ const CreateContactForm = ({ onSubmit, editData }) => {
   const { field: countryCodeField, onChange: countryCodeOnChange } = useField({
     initialValue: editData ? editData.country_code : "",
   });
-
   const {
     value: isFavorite,
     field: addToFavouritesField,
     onChange: addToFavouritesOnChange,
-  } = useField({ initialValue: editData ? editData.is_favorite : "" });
+  } = useField({
+    initialValue:
+      editData && editData.is_favorite ? editData.is_favorite : false,
+  });
 
   const countriesOptions = countriesData.map(({ text, value }) => {
     return { text, value };
@@ -128,7 +130,8 @@ const CreateContactForm = ({ onSubmit, editData }) => {
           onChange={addToFavouritesOnChange}
           type="checkbox"
           name="is_favorite"
-          checked={isFavorite}
+          checked={!!isFavorite}
+          id="add_to_favorites"
         />
         <Button>{loading ? "Adding" : "Add"}</Button>
       </CreateContactContainer>
