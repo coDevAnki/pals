@@ -14,10 +14,6 @@ const NotLoggedInText = styled.div`
   text-align: center;
   font-size: 3rem;
   padding: 0.5em;
-  @media (max-width: 650px) {
-    grid-column: 1/-1;
-    grid-row: 1/-1;
-  }
 
   h2,
   h5 {
@@ -28,6 +24,14 @@ const NotLoggedInText = styled.div`
   h5 {
     color: grey;
     font-weight: 400;
+  }
+  @media (max-width: 650px) {
+    grid-column: 1/-1;
+    grid-row: 1/-1;
+
+    h5 {
+      color: #202020;
+    }
   }
 `;
 const NotLoggedInImage = styled.div`
