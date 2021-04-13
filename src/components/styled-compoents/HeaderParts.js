@@ -39,9 +39,10 @@ const HeaderContainer = styled.header`
         content: "";
         position: absolute;
         background-color: black;
+        right: 0.4rem;
+        width: 86%;
         bottom: -5px;
         height: 2px;
-        width: 100%;
         transition: 0.2s ease transform;
         transform: scaleX(0);
         transform-origin: left;
