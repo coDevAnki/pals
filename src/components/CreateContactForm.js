@@ -49,8 +49,8 @@ const CreateContactForm = ({ onSubmit, editData }) => {
     meta: phoneNumberMeta,
   } = useField({
     validateFn: (val) => {
-      for (let char of val) {
-        if ("123457890".includes(char) === false)
+      for (let char of val + "") {
+        if ("1234567890".includes(char) === false)
           return "phone number should only contain 0-9 digits";
       }
       return val.length < 10 ? "at least 10 char needed" : "";

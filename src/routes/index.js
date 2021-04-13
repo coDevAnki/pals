@@ -6,6 +6,7 @@ import {
   RegisterPage,
   SignInPage,
 } from "../pages";
+import RenderRoute from "./RenderRoute";
 
 const routes = [
   { path: "/", component: HomePage, title: "Home", needsAuth: false },
@@ -35,4 +36,4 @@ const routes = [
   },
 ];
 
-export default routes;
+export { routes, RenderRoute };

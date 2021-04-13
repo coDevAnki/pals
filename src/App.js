@@ -4,7 +4,7 @@ import { Footer, Header } from "./components";
 import { useAuthDispatch, useAuthState } from "./context";
 import autoLoginAction from "./context/actions/authActions/autoLoginAction";
 import { useSessionStorage } from "./custom-hooks";
-import routes from "./routes";
+import { RenderRoute, routes } from "./routes";
 
 const App = () => {
   const {
@@ -27,15 +27,17 @@ const App = () => {
     <BrowserRouter>
       <Header />
       <Switch>
-        {routes.map(({ path, component: Component, needsAuth }, index) => (
-          <Route key={index} exact path={path}>
-            {needsAuth && currentUser === null && data === null ? (
-              <Redirect to="/signin" />
-            ) : (
-              <Component />
-            )}
-          </Route>
-        ))}
+        {routes.map(
+          ({ path, component: Component, needsAuth, title }, index) => (
+            <Route key={index} exact path={path}>
+              {needsAuth && currentUser === null && data === null ? (
+                <Redirect to="/signin" />
+              ) : (
+                <RenderRoute Component={Component} title={title} />
+              )}
+            </Route>
+          )
+        )}
       </Switch>
       <Footer />
     </BrowserRouter>
