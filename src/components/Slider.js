@@ -23,7 +23,12 @@ const Slider = ({ data }) => {
   }
   return (
     <SliderWrapper>
-      <Clickable icon="caret-left" iconSize="3x" onClick={scrollLeft} />
+      <Clickable
+        margin="auto"
+        icon="caret-left"
+        iconSize="3x"
+        onClick={scrollLeft}
+      />
       <SliderContainer itemsCount={data.length}>
         {data.map(
           (
@@ -48,7 +53,12 @@ const Slider = ({ data }) => {
           )
         )}
       </SliderContainer>
-      <Clickable icon="caret-right" iconSize="3x" onClick={scrollRight} />
+      <Clickable
+        margin="auto"
+        icon="caret-right"
+        iconSize="3x"
+        onClick={scrollRight}
+      />
     </SliderWrapper>
   );
 };

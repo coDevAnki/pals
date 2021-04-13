@@ -10,7 +10,11 @@ const HeaderContainer = styled.header`
   align-items: baseline;
   background-color: var(--clr-primary);
   .logo {
-    color: grey;
+    color: var(--clr-primary);
+    font-style: italic;
+    border-radius: 0.3rem;
+    padding: 0.1rem 0.1rem 0.1rem 0;
+    background-color: black;
     &::first-letter {
       font-size: 2.5rem;
     }
