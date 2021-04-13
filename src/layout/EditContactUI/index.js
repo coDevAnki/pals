@@ -16,7 +16,6 @@ const EditContactUI = () => {
 
   const onSubmit = (e) => (formFields) => {
     e.preventDefault();
-    console.log(formFields);
     editContactAction(contactsDispatch, editId, formFields, history);
   };
 

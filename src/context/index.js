@@ -9,7 +9,7 @@ export const contactsDispatchContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
-// console.log(authState);
+  // console.log(authState);
   return (
     <authStateContext.Provider value={authState}>
       <authDispatchContext.Provider value={authDispatch}>
@@ -24,7 +24,7 @@ export const ContactsProvider = ({ children }) => {
     contactsReducer,
     initialContactsState
   );
-// console.log(contactsState);
+  // console.log(contactsState);
   return (
     <contactsStateContext.Provider value={contactsState}>
       <contactsDispatchContext.Provider value={contactsDispatch}>

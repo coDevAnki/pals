@@ -5,6 +5,7 @@ import FormInput from "./FormInput";
 import Heading from "./Heading";
 import ImageThumb from "./ImageThumb";
 import Linked from "./Linked";
+import Modal from "./Modal";
 import Segment from "./Segment";
 import Select from "./Select";
 export {
@@ -17,4 +18,5 @@ export {
   FormHeader,
   Segment,
   Heading,
+  Modal,
 };

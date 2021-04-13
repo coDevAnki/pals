@@ -2,10 +2,10 @@ import styled from "styled-components";
 import FlexWrapper from "./FlexWrapper";
 
 const ModalContainer = styled.div`
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.05);
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 `;

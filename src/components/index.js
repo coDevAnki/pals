@@ -1,10 +1,12 @@
 import ChooseImage from "./ChooseImage";
+import ContactsList from "./ContactsList";
 import CreateContactForm from "./CreateContactForm";
+import Footer from "./Footer";
 import Header from "./Header";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Slider from "./Slider";
-import ContactsList from "./ContactsList";
+
 export {
   Header,
   LoginForm,
@@ -12,5 +14,6 @@ export {
   CreateContactForm,
   ChooseImage,
   Slider,
-  ContactsList
+  ContactsList,
+  Footer,
 };

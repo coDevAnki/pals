@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuthDispatch, useAuthState, useContactsDispatch } from "../context";
 import { clearContactsAction, logoutAction } from "../context/actions";
 import { Clickable } from "./reusable-components";
 import SearchField from "./SearchField";
-import { HeaderContainer } from "./styled-compoents";
+import { ContactsNav, HeaderContainer } from "./styled-compoents";
 
 const Header = () => {
   const {
@@ -13,28 +13,60 @@ const Header = () => {
   const authDispatch = useAuthDispatch();
   const contactsDispatch = useContactsDispatch();
   const history = useHistory();
-
+  const [showNav, setShowNav] = useState(false);
   const logout = () => {
     logoutAction(authDispatch, history);
     clearContactsAction(contactsDispatch);
   };
+  const toggleNav = () => {
+    setShowNav(!showNav);
+  };
 
   return (
-    <HeaderContainer>
-      <nav>
-        <Clickable to="/">LOGO</Clickable>
-      </nav>
-
+    <HeaderContainer showNav={showNav}>
+      <Clickable className="logo" to="/">
+        Pals
+      </Clickable>
       {currentUser ? (
-        <nav>
+        <>
           <SearchField />
-          <Clickable icon="plus" to="/create-contacts">
-            Add Contact
-          </Clickable>
-          <Clickable icon="sign-out-alt" onClick={logout}>
-            Log out
-          </Clickable>
-        </nav>
+          <div onClick={toggleNav} className="hamburger-menu">
+            &#9776;
+          </div>
+          {showNav ? (
+            <ContactsNav
+              showNav={showNav}
+              setShowNav={setShowNav}
+              className="contacts_nav"
+            >
+              <Clickable align="baseline" icon="plus" to="/create-contacts">
+                Add Contact
+              </Clickable>
+              <Clickable
+                align="baseline"
+                icon="sign-out-alt"
+                to="/"
+                onClick={logout}
+              >
+                Log out
+              </Clickable>
+            </ContactsNav>
+          ) : (
+            <nav className="contacts_nav_desktop">
+              <Clickable align="baseline" icon="plus" to="/create-contacts">
+                Add Contact
+              </Clickable>
+              <Clickable
+                align="baseline"
+                icon="sign-out-alt"
+                to="/"
+                onClick={logout}
+              >
+                Log out
+              </Clickable>
+            </nav>
+          )}
+        </>
       ) : (
         <nav>
           <Clickable to="/signin">Log in</Clickable>

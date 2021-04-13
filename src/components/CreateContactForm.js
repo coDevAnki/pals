@@ -3,11 +3,19 @@ import { useContactsState } from "../context";
 import { useField, useImageUpload } from "../custom-hooks";
 import countriesData from "../utils/countriesData";
 import ChooseImage from "./ChooseImage";
-import { Button, FormHeader, FormInput, Select } from "./reusable-components";
+import {
+  Button,
+  Clickable,
+  FormHeader,
+  FormInput,
+  Select,
+} from "./reusable-components";
 import { CreateContactContainer } from "./styled-compoents";
+
 const CreateContactForm = ({ onSubmit, editData }) => {
   const {
-    addContact: { loading },
+    addContact: { loading: addLoading },
+    editContact: { loading: editLoading },
   } = useContactsState();
   const {
     tempImageURL,
@@ -22,6 +30,7 @@ const CreateContactForm = ({ onSubmit, editData }) => {
     value: firstname,
     field: firstnameField,
     onChange: firstnameOnChange,
+    meta: firstnameMeta,
   } = useField({
     initialValue: editData ? editData.first_name : "",
   });
@@ -30,6 +39,7 @@ const CreateContactForm = ({ onSubmit, editData }) => {
     value: lastname,
     field: lastnameField,
     onChange: lastnameOnChange,
+    meta: lastnameMeta,
   } = useField({ initialValue: editData ? editData.last_name : "" });
 
   const {
@@ -38,11 +48,22 @@ const CreateContactForm = ({ onSubmit, editData }) => {
     onChange: phoneNumberOnChange,
     meta: phoneNumberMeta,
   } = useField({
-    validateFn: (val) => (val.length < 10 ? "at least 10 char needed" : ""),
+    validateFn: (val) => {
+      for (let char of val) {
+        if ("123457890".includes(char) === false)
+          return "phone number should only contain 0-9 digits";
+      }
+      return val.length < 10 ? "at least 10 char needed" : "";
+    },
     initialValue: editData ? editData.phone_number : "",
   });
 
-  const { field: countryCodeField, onChange: countryCodeOnChange } = useField({
+  const {
+    value: countryCode,
+    field: countryCodeField,
+    onChange: countryCodeOnChange,
+    meta: countryCodeMeta,
+  } = useField({
     initialValue: editData ? editData.country_code : "",
   });
   const {
@@ -65,10 +86,36 @@ const CreateContactForm = ({ onSubmit, editData }) => {
         ).text
       : "---Choose---";
 
+  const allValid =
+    firstnameMeta.isValid &&
+    lastnameMeta.isValid &&
+    phoneNumberMeta.isValid &&
+    countryCodeMeta.isValid;
+
+  const isEditInValid =
+    editData?.first_name === firstname &&
+    editData?.last_name === lastname &&
+    editData?.phone_number === phoneNumber &&
+    editData?.country_code === countryCode &&
+    editData?.is_favorite === isFavorite &&
+    editData?.contact_picture === tempImageURL;
+
   return (
-    <div>
-      <FormHeader>
-        {editData ? "Edit Contact" : "Create New Contact"}
+    <>
+      <FormHeader mt="2rem">
+        {editData ? (
+          <>
+            Edit Contact
+            <Clickable
+              className="put_at_end"
+              width="20px"
+              icon="trash"
+              to={`/delete/${editData.id}`}
+            />
+          </>
+        ) : (
+          "Create New Contact"
+        )}
       </FormHeader>
       <CreateContactContainer
         onSubmit={(e) =>
@@ -102,12 +149,14 @@ const CreateContactForm = ({ onSubmit, editData }) => {
           label="First Name"
           name="first_name"
           onChange={firstnameOnChange}
+          error={firstnameMeta.error}
           value={firstname}
         />
         <FormInput
           label="Last Name"
           onChange={lastnameOnChange}
           name="last_name"
+          error={lastnameMeta.error}
           value={lastname}
         />
         <Select
@@ -116,6 +165,7 @@ const CreateContactForm = ({ onSubmit, editData }) => {
           name="country_code"
           options={countriesOptions}
           display="---Choose---"
+          error={countryCodeMeta.error}
           editValue={editCountryCode()}
         />
         <FormInput
@@ -133,9 +183,17 @@ const CreateContactForm = ({ onSubmit, editData }) => {
           checked={!!isFavorite}
           id="add_to_favorites"
         />
-        <Button>{loading ? "Adding" : "Add"}</Button>
+        {editData ? (
+          <Button disabled={editLoading || isEditInValid || !allValid}>
+            {editLoading ? "Saving..." : "Save"}
+          </Button>
+        ) : (
+          <Button disabled={addLoading || !allValid}>
+            {addLoading ? "Adding..." : "Add"}
+          </Button>
+        )}
       </CreateContactContainer>
-    </div>
+    </>
   );
 };
 

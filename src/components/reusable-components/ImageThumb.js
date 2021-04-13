@@ -4,6 +4,14 @@ import styled from "styled-components";
 const StyledImageThumb = styled.div`
   height: 150px;
   width: 150px;
+  @media (max-width: 650px) {
+    height: 130px;
+    width: 130px;
+  }
+  @media (max-width: 520px) {
+    height: 100px;
+    width: 100px;
+  }
   border-radius: 50%;
   display: flex;
   justify-content: center;

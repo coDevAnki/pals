@@ -26,7 +26,6 @@ const createContactAction = async (dispatch, data, history) => {
   };
 
   if (data.contact_picture) {
-    console.log(data.contact_picture);
     storage
       .ref(`${FIREBASE_IMAGE_REF}/${data.contact_picture.name}`)
       .put(data.contact_picture)

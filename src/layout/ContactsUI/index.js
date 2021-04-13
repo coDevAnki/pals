@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { ContactsList, Slider } from "../../components";
 import { Heading } from "../../components/reusable-components";
+import { FlexWrapper } from "../../components/styled-compoents";
 import {
   useAuthState,
   useContactsDispatch,
@@ -15,8 +16,6 @@ const ContactsUI = () => {
     loginUser: { currentUser },
   } = useAuthState();
 
-  console.log(contactsState);
-
   useEffect(() => {
     if (currentUser) {
       if (!currentUser === null) {
@@ -28,7 +27,10 @@ const ContactsUI = () => {
   }, [currentUser]);
 
   return contactsState.contacts.loading ? (
-    <h3>Loading</h3>
+    <FlexWrapper height="100vh">
+      <p>Loading... </p>
+      <i className="fas fa-spinner fa-spin"></i>
+    </FlexWrapper>
   ) : (
     <>
       {contactsState?.contacts?.isSearchActive ? (

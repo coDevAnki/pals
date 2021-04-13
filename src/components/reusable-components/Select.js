@@ -10,8 +10,8 @@ export const SelectField = styled.select`
 const Select = ({
   label,
   display,
-  error,
   onChange,
+  error,
   message,
   options,
   editValue,
@@ -20,7 +20,7 @@ const Select = ({
   const [firstRender, setFirstRender] = useState(true);
 
   return (
-    <InputField>
+    <InputField error={error} message={message}>
       {label && <FormLabel>{label}</FormLabel>}
       <SelectField
         onChange={(e) => {

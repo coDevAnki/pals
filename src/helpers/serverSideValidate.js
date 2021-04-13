@@ -1,7 +1,8 @@
 import axiosInstance from "../api/axios";
 
-const MockRegister = (data) => ({
-  username: data.username || "",
+const MockUserRegister = (data) => ({
+  username: data.username || "ANY",
+  email: data.email || "",
   first_name: "xx",
   last_name: "xx",
   password: "xxxxxxxx",
@@ -10,7 +11,7 @@ const MockRegister = (data) => ({
 export const serverSideUsernameValidate = async (dataToValidate) => {
   try {
     const data = await axiosInstance().post("/auth/register", {
-      ...MockRegister({ username: dataToValidate }),
+      ...MockUserRegister({ username: dataToValidate }),
     });
     return data.response;
   } catch (err) {

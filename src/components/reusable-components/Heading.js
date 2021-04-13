@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const HeadingContainer = styled.header`
-  font-size: 3.5rem;
+  font-size: 2.8rem;
   margin: 2rem;
   border-bottom: 1px solid lightgray;
 `;

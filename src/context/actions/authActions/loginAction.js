@@ -11,7 +11,10 @@ const loginAction = async (dispatch, data, history) => {
       history.push("/");
     }
   } catch (err) {
-    dispatch({ type: LOGIN_FAILURE, payload: err?.message });
+    dispatch({
+      type: LOGIN_FAILURE,
+      payload: err?.response?.data?.detail || err?.message,
+    });
   }
 };
 

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const Button = styled.button`
-  padding: 0.5rem;
   font-family: "IBM Plex Sans", sans-serif;
   border: none;
   background-color: salmon;
@@ -10,6 +9,7 @@ const Button = styled.button`
   color: white;
   font-size: 2.5rem;
   width: ${({ width }) => (width ? width : "100%")};
+  padding: ${({ padding }) => (padding ? padding : "0.5rem")};
   margin: ${({ margin }) => (margin ? margin : "")};
   cursor: pointer;
   transition: 0.5s ease all;

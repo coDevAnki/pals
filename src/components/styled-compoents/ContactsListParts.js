@@ -15,11 +15,36 @@ const ContactContainer = styled(FlexWrapper).attrs({ justify: "space-around" })`
 `;
 const ConatctSection = styled.div`
   width: 100%;
+  text-align: center;
   display: grid;
   align-items: center;
   justify-items: center;
+  align-content: center;
+  justify-content: center;
   grid-template-columns: 2fr 1fr 2fr 1fr 1fr;
-  text-align: center;
+  & > :nth-child(2) {
+    justify-self: start;
+  }
+  @media (max-width: 600px) {
+    & > :nth-child(1) {
+      grid-column: 1/3;
+      justify-self: start;
+    }
+    & > :nth-child(2) {
+      grid-column: 1/3;
+    }
+    & > :nth-child(3) {
+      grid-row: 1/-1;
+      grid-column: 3/-1;
+      justify-self: end;
+    }
+    & > :nth-child(4) {
+      grid-column: 4/5;
+    }
+    & > :nth-child(5) {
+      grid-column: 5/6;
+    }
+  }
 `;
 
 export { ContactsListContainer, ContactContainer, ConatctSection };

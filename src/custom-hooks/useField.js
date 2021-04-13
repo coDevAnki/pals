@@ -6,7 +6,8 @@ const useField = ({
   initialValue = "",
   realTimeValidation = true,
   errorMessage = "Invalid Input",
-  successMessage = "avalilable",
+  successMessage = "",
+  watchList = [],
   debounceTime,
 } = {}) => {
   const [value, setValue] = useState(initialValue);
@@ -20,24 +21,33 @@ const useField = ({
   });
 
   const metaRef = useRef();
+  const isFirstRender = useRef(true);
+  const isInputTouched = useRef(false);
 
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    isInputTouched.current = true;
+  }, [value]);
   useEffect(() => {
     if (realTimeValidation && !debounceTime) {
       runValidation(value);
     }
-  }, [value]);
+  }, [value, ...watchList]);
 
   useEffect(() => {
     if (realTimeValidation && debounceTime) {
       runValidation(debounced);
     }
-  }, [debounced]);
+  }, [debounced, ...watchList]);
 
   const runValidation = async (toValidate) => {
     if (!toValidate.length) {
       metaRef.current = {
         checking: false,
-        error: null,
+        error: isInputTouched.current ? "this field is required" : null,
         isValid: false,
         message: null,
       };

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useContactsDispatch } from "../context";
 import { searchContactsAction } from "../context/actions";
 import { useField } from "../custom-hooks";
-
+import { SearchContainer, SearchInput, SearchLabel } from "./styled-compoents";
 const SearchField = () => {
   const { value: searchedText, onChange } = useField();
   const contactsDispatch = useContactsDispatch();
@@ -12,10 +12,12 @@ const SearchField = () => {
   }, [searchedText]);
 
   return (
-    <input
-      style={{ padding: ".3rem", fontSize: "1.5rem" }}
-      onChange={onChange}
-    />
+    <SearchContainer>
+      <SearchLabel htmlFor="search_contact">
+        <i className="fas fa-search fa-xs"></i>
+      </SearchLabel>
+      <SearchInput id="search_contact" onChange={onChange} />
+    </SearchContainer>
   );
 };
 

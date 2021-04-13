@@ -1,5 +1,9 @@
 import axiosInstance from "../../../api/axios";
-import { REGISTER_FAILURE, REGISTER_LOADING, REGISTER_SUCCESS } from "../../actionTypes";
+import {
+  REGISTER_FAILURE,
+  REGISTER_LOADING,
+  REGISTER_SUCCESS,
+} from "../../actionTypes";
 
 const registerAction = async (data, dispatch, history) => {
   dispatch({ type: REGISTER_LOADING });
@@ -7,10 +11,13 @@ const registerAction = async (data, dispatch, history) => {
     const res = await axiosInstance().post("/auth/register", data);
     if (res) {
       dispatch({ type: REGISTER_SUCCESS, payload: res.data.user });
-      history.push("/");
+      history.push("/signin");
     }
   } catch (err) {
-    dispatch({ type: REGISTER_FAILURE, payload: err?.message });
+    dispatch({
+      type: REGISTER_FAILURE,
+      payload: err?.response?.data || err?.message,
+    });
   }
 };
 

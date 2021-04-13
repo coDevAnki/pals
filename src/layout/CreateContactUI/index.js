@@ -11,7 +11,6 @@ const CreateContactUI = () => {
 
   const onSubmit = (e) => (formFields) => {
     e.preventDefault();
-    console.log(formFields);
     createContactAction(contactsDispatch, formFields, history);
   };
   return (

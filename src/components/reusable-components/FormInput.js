@@ -2,23 +2,22 @@ import React from "react";
 import styled, { css } from "styled-components";
 export const InputField = styled.div`
   width: 100%;
-
   input,
   select {
     box-sizing: border-box;
     outline: none;
     border: 1px solid;
     padding: 0.5rem;
-    font-size: 2.3rem;
+    font-size: 2rem;
     width: 100%;
   }
 
   &::after {
     content: "";
-    min-height: 3rem;
+    min-height: 2.5rem;
     display: block;
     width: 100%;
-    font-size: 2rem;
+    font-size: 1.8rem;
     ${({ error }) =>
       error &&
       css`
@@ -53,7 +52,7 @@ export const InputField = styled.div`
 `;
 
 export const FormLabel = styled.div`
-  font-size: 2.5rem;
+  font-size: 2rem;
   max-width: 100%;
   display: inline;
 `;

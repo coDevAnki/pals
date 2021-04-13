@@ -5,9 +5,13 @@ import { ContactsListContainer } from "./styled-compoents";
 const ContactsList = ({ data }) => {
   return (
     <ContactsListContainer>
-      {data.map((item) => (
-        <ContactDetails item={item} />
-      ))}
+      {data?.length ? (
+        data.map((item, i) => (
+          <ContactDetails key={`contact_${i}`} item={item} />
+        ))
+      ) : (
+        <div>No Contacts Yet</div>
+      )}
     </ContactsListContainer>
   );
 };

@@ -8,7 +8,6 @@ const axiosInstance = (history = null) => {
   if (localStorage.token) {
     headers.Authorization = `Bearer ${localStorage.token}`;
   }
-  console.log("axios");
   const axiosInstance = axios.create({
     baseURL: baseURL,
     headers,
@@ -29,9 +28,9 @@ const axiosInstance = (history = null) => {
         localStorage.removeItem("token");
 
         if (history) {
-          history.push("/auth/login");
+          history.push("/login");
         } else {
-          window.location = "/auth/login";
+          window.location = "/login";
         }
       } else {
         return new Promise((resolve, reject) => {

@@ -6,5 +6,10 @@ const FlexWrapper = styled.div`
   justify-content: ${({ justify }) => (justify ? justify : "center")};
   align-items: ${({ align }) => (align ? align : "center")};
   width: ${({ width }) => (width ? width : "")};
+  height: ${({ height }) => (height ? height : "auto")};
+
+  i.fa-spin {
+    margin: 0 1rem;
+  }
 `;
 export default FlexWrapper;

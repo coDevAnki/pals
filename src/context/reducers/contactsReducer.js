@@ -144,7 +144,6 @@ const contactsReducer = (state, { type, payload }) => {
         },
       };
     case EDIT_CONTACT_SUCCESS: {
-      console.log(state);
       return {
         ...state,
         contacts: {
@@ -181,7 +180,6 @@ const contactsReducer = (state, { type, payload }) => {
         },
       };
     case SEARCH_CONTACTS:
-      console.log("heloo", payload);
       return {
         ...state,
         contacts: {
@@ -190,7 +188,8 @@ const contactsReducer = (state, { type, payload }) => {
           searchedData: !!payload.length
             ? state.contacts.data.filter(
                 ({ first_name, last_name }) =>
-                  first_name.includes(payload) || last_name.includes(payload)
+                  first_name.toLowerCase().includes(payload.toLowerCase()) ||
+                  last_name.toLowerCase().includes(payload.toLowerCase())
               )
             : [],
         },

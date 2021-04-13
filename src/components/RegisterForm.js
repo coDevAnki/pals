@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuthState } from "../context";
+import { useAuthDispatch, useAuthState } from "../context";
+import authClearAction from "../context/actions/authActions/authClearAction";
 import { useField } from "../custom-hooks";
 import { serverSideUsernameValidate } from "../helpers/serverSideValidate";
 import { validateEmail, validatePassword } from "../helpers/validations";
@@ -8,7 +9,10 @@ import { Button, FormHeader, FormInput, Segment } from "./reusable-components";
 import { FormContainer } from "./styled-compoents";
 
 const RegisterForm = ({ onSubmit }) => {
-  const { loading } = useAuthState();
+  const {
+    registerUser: { loading, error },
+  } = useAuthState();
+  const authDispatch = useAuthDispatch();
   const {
     field: usernameField,
     onChange: usernameOnChange,
@@ -42,8 +46,11 @@ const RegisterForm = ({ onSubmit }) => {
     onChange: emailOnChange,
     meta: emailMeta,
   } = useField({
-    validateFn: validateEmail,
-    debounceTime: 1000,
+    validateFn: (val) => {
+      if (error?.email) return error?.email?.join("");
+      if (validateEmail(val)) return validateEmail(val);
+    },
+    watchList: [error],
   });
 
   const {
@@ -75,7 +82,7 @@ const RegisterForm = ({ onSubmit }) => {
           })
         }
       >
-        <FormHeader>Create New Contact</FormHeader>
+        <FormHeader mb="2rem">Create New Contact</FormHeader>
         <FormInput
           label="User Name"
           id="username"
@@ -105,7 +112,10 @@ const RegisterForm = ({ onSubmit }) => {
           label="Email"
           id="email"
           name="email"
-          onChange={emailOnChange}
+          onChange={(e) => {
+            authClearAction(authDispatch);
+            emailOnChange(e);
+          }}
           type="text"
           error={emailMeta.error}
         />

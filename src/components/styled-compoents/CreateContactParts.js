@@ -9,6 +9,9 @@ const CreateContactContainer = styled.form`
       grid-column: 1 /-1;
     }
   }
+  @media (max-width: 580px) {
+    display: block;
+  }
 `;
 
 const CreateContactUIWrapper = styled.div`
@@ -16,4 +19,4 @@ const CreateContactUIWrapper = styled.div`
   margin: auto;
 `;
 
-export {CreateContactUIWrapper,CreateContactContainer};
+export { CreateContactUIWrapper, CreateContactContainer };
