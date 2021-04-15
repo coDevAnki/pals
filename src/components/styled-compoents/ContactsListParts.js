@@ -24,6 +24,9 @@ const ConatctSection = styled.div`
   grid-template-columns: 2fr 1fr 2fr 1fr 1fr;
   & > :nth-child(2) {
     justify-self: start;
+    .no-click {
+      cursor: auto;
+    }
   }
   @media (max-width: 600px) {
     & > :nth-child(1) {

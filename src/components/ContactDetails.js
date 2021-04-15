@@ -40,7 +40,7 @@ const ContactDetails = ({
           src={contact_picture}
         />
         <Clickable>
-          {first_name + " " + last_name}
+          <span className="no-click"> {first_name + " " + last_name} </span>
 
           <Clickable
             icon="star"
