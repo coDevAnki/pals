@@ -14,16 +14,17 @@ const Header = () => {
   } = useAuthState();
   const authDispatch = useAuthDispatch();
   const contactsDispatch = useContactsDispatch();
-  const history = useHistory();
   const { clearData: clearStoredUser } = useSessionStorage("PALS");
   const { clearData: clearStoredContactsData } = useSessionStorage("PALSDATA");
+  const history = useHistory();
   const [showNav, setShowNav] = useState(false);
+
   const logout = () => {
     logoutAction(authDispatch, history);
+    authClearAction(authDispatch);
     clearStoredUser();
     clearStoredContactsData();
     clearContactsAction(contactsDispatch);
-    authClearAction(authDispatch);
   };
   const toggleNav = () => {
     setShowNav(!showNav);

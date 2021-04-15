@@ -67,7 +67,7 @@ const LoginForm = ({ onSubmit }) => {
         {loading ? "Loading..." : "Submit"}
       </Button>
       <Segment>
-        Dont have an account ? <Link to="/register">Register</Link>
+        Don't have an account ? <Link to="/register">Register</Link>
       </Segment>
     </FormContainer>
   );

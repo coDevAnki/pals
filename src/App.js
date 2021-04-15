@@ -17,7 +17,7 @@ const App = () => {
     ""
   );
   const {
-    data: storedUserData,
+    data: storedContactsData,
     setData: setStoredContactsData,
   } = useSessionStorage("PALSDATA");
 
@@ -42,7 +42,9 @@ const App = () => {
         {routes.map(
           ({ path, component: Component, needsAuth, title }, index) => (
             <Route key={index} exact path={path}>
-              {needsAuth && currentUser === null && storedUserData === null ? (
+              {needsAuth &&
+              currentUser === null &&
+              storedContactsData === null ? (
                 <Redirect to="/signin" />
               ) : (
                 <RenderRoute Component={Component} title={title} />
