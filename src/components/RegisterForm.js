@@ -129,7 +129,7 @@ const RegisterForm = ({ onSubmit }) => {
           message={passwordMeta.message}
         />
         <Button disabled={!allValid || loading}>
-          {loading ? "Loading..." : "submit"}
+          {loading ? "Loading..." : "Submit"}
         </Button>
         <Segment>
           already have an account? <Link to="/signin">Log in </Link>

@@ -1,21 +1,23 @@
 import React from "react";
-import { useAuthDispatch } from "../../context";
-import {useHistory} from "react-router-dom"
-import { RegisterForm } from "../../components";
+import { RegisterForm, RegisterSuccess } from "../../components";
+import { useAuthDispatch, useAuthState } from "../../context";
 import { registerAction } from "../../context/actions";
 
 const RegisterUI = () => {
-  const authDispatch= useAuthDispatch()
-  const history=useHistory()
-
+  const authDispatch = useAuthDispatch();
+  const { registerUser } = useAuthState();
   const onSubmit = (e) => (formFields) => {
     e.preventDefault();
-    registerAction(formFields, authDispatch, history);
+    registerAction(formFields, authDispatch);
   };
 
   return (
     <div>
-      <RegisterForm onSubmit={onSubmit} />
+      {registerUser.data ? (
+        <RegisterSuccess {...registerUser.data} />
+      ) : (
+        <RegisterForm onSubmit={onSubmit} />
+      )}
     </div>
   );
 };

@@ -11,7 +11,7 @@ const App = () => {
     loginUser: { currentUser },
   } = useAuthState();
   const authDispatch = useAuthDispatch();
-  const [data, setData] = useSessionStorage("PALS");
+  const [data, setData] = useSessionStorage("PALS", "");
 
   useEffect(() => {
     if (data) {

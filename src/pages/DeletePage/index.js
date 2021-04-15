@@ -23,17 +23,17 @@ const DeletePage = () => {
 
   return (
     <Modal onClickOutside={removeModal}>
-      <div>are you sure to delete this contact?</div>
+      <div>Are you sure to delete this contact ?</div>
       <FlexWrapper justify={"flex-end"}>
         <Button
-          width="100px"
+          padding=".5rem 1rem"
           disabled={loading}
           onClick={() => removeContact(deleteId)}
         >
-          {loading ? "deleting" : "delete"}
+          {loading ? "Deleting" : "Delete"}
         </Button>
-        <Button width="100px" margin={"1rem"} onClick={removeModal}>
-          no
+        <Button padding=".5rem 1rem" margin={"1rem"} onClick={removeModal}>
+          No
         </Button>
       </FlexWrapper>
     </Modal>

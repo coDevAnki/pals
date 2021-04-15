@@ -16,7 +16,8 @@ const ModalBody = styled(FlexWrapper).attrs({
   background-color: white;
   box-sizing: border-box;
   width: 40%;
-  height: 30%;
+  min-width: 200px;
+  height: 25%;
   margin: 200px auto;
   padding: 5%;
   font-size: 2rem;

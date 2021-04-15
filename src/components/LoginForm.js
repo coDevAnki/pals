@@ -64,7 +64,7 @@ const LoginForm = ({ onSubmit }) => {
         label="Password"
       />
       <Button disabled={!allValid || loading}>
-        {loading ? "Loading..." : "submit"}
+        {loading ? "Loading..." : "Submit"}
       </Button>
       <Segment>
         need an account ? <Link to="/register">Register</Link>

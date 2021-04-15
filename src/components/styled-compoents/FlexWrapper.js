@@ -7,7 +7,8 @@ const FlexWrapper = styled.div`
   align-items: ${({ align }) => (align ? align : "center")};
   width: ${({ width }) => (width ? width : "")};
   height: ${({ height }) => (height ? height : "auto")};
-
+  text-align: center;
+  margin: auto;
   i.fa-spin {
     margin: 0 1rem;
   }

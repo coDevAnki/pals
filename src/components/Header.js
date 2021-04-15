@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuthDispatch, useAuthState, useContactsDispatch } from "../context";
 import { clearContactsAction, logoutAction } from "../context/actions";
+import authClearAction from "../context/actions/authActions/authClearAction";
 import { Clickable } from "./reusable-components";
 import SearchField from "./SearchField";
 import { ContactsNav, HeaderContainer } from "./styled-compoents";
@@ -17,6 +18,7 @@ const Header = () => {
   const logout = () => {
     logoutAction(authDispatch, history);
     clearContactsAction(contactsDispatch);
+    authClearAction(authDispatch);
   };
   const toggleNav = () => {
     setShowNav(!showNav);
