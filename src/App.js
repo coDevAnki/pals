@@ -28,7 +28,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log("contacts changed");
     setStoredContactsData(contactsState);
   }, [contactsState]);
 
