@@ -13,7 +13,10 @@ const useSessionStorage = (key, initialData) => {
     sessionStorage.setItem(key, JSON.stringify(data));
   }, [key, data]);
 
-  return [data, setData];
+  const clearData = () => {
+    localStorage.removeItem(key);
+  };
+  return { data, setData, clearData };
 };
 
 export default useSessionStorage;

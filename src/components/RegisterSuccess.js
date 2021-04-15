@@ -16,7 +16,7 @@ const RegisterSuccess = ({ first_name, last_name, username }) => {
       <div>Hello {" " + first_name + " " + last_name} !</div>
       <p>
         Your Registration with username {" " + username + " "} was successful.{" "}
-        you can now Login with your credentials
+        You can now login with your credentials
       </p>
       <Clickable to="/signin">Go To Login Page</Clickable>
     </FlexWrapper>

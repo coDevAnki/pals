@@ -9,7 +9,7 @@ import {
   REGISTER_SUCCESS,
 } from "../../actionTypes";
 import { initialAuthState } from "../../initialStates";
-import loginReducer from "./loginReducer";
+import loginReducer from "./loginReducers";
 import registerReducer from "./registerReducer";
 
 const authReducer = (state = initialAuthState, { type, payload }) => {

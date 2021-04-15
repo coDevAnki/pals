@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
+import { useSessionStorage } from "../custom-hooks";
 import { initialAuthState, initialContactsState } from "./initialStates";
 import { authReducer, contactsReducer } from "./reducers";
 
@@ -9,7 +10,6 @@ export const contactsDispatchContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
-  // console.log(authState);
   return (
     <authStateContext.Provider value={authState}>
       <authDispatchContext.Provider value={authDispatch}>
@@ -20,11 +20,14 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const ContactsProvider = ({ children }) => {
-  const [contactsState, contactsDispatch] = useReducer(
-    contactsReducer,
+  const { data: storedContactsData } = useSessionStorage(
+    "PALSDATA",
     initialContactsState
   );
-  // console.log(contactsState);
+  const [contactsState, contactsDispatch] = useReducer(
+    contactsReducer,
+    storedContactsData
+  );
   return (
     <contactsStateContext.Provider value={contactsState}>
       <contactsDispatchContext.Provider value={contactsDispatch}>

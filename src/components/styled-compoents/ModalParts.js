@@ -25,5 +25,8 @@ const ModalBody = styled(FlexWrapper).attrs({
   > * {
     margin-top: 20px;
   }
+  button {
+    font-size: 1.8rem;
+  }
 `;
 export { ModalContainer, ModalBody };

@@ -4,7 +4,7 @@ const FormContainer = styled.form`
   display: flex;
   max-width: 400px;
   min-width: 250px;
-  width: 40%;
+  width: 42%;
   flex-direction: column;
   position: relative;
   margin: auto;

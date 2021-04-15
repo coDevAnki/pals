@@ -11,14 +11,14 @@ const DeletePage = () => {
   const {
     deleteContact: { loading },
   } = useContactsState();
-  const history = useHistory();
-  const { deleteId } = useParams();
 
+  const { deleteId } = useParams();
+  const history = useHistory();
   const removeContact = (id) => {
     deleteContactAction(contactsDispatch, id, history);
   };
   const removeModal = () => {
-    history.push("/");
+    history.goBack();
   };
 
   return (

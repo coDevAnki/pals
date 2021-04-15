@@ -132,7 +132,7 @@ const RegisterForm = ({ onSubmit }) => {
           {loading ? "Loading..." : "Submit"}
         </Button>
         <Segment>
-          already have an account? <Link to="/signin">Log in </Link>
+          Already have an account? <Link to="/signin">Log in </Link>
         </Segment>
       </FormContainer>
     </>

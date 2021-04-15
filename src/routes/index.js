@@ -26,12 +26,13 @@ const routes = [
   {
     path: "/edit/:editId",
     component: EditPage,
-    title: "Log in",
+    title: "Edit Contact",
     needsAuth: true,
   },
   {
     path: "/delete/:deleteId",
     component: DeletePage,
+    title: "Delete Contact",
     needsAuth: true,
   },
 ];

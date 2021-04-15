@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { Footer, Header } from "./components";
-import { useAuthDispatch, useAuthState } from "./context";
+import { useAuthDispatch, useAuthState, useContactsState } from "./context";
 import autoLoginAction from "./context/actions/authActions/autoLoginAction";
 import { useSessionStorage } from "./custom-hooks";
 import { RenderRoute, routes } from "./routes";
@@ -11,16 +11,29 @@ const App = () => {
     loginUser: { currentUser },
   } = useAuthState();
   const authDispatch = useAuthDispatch();
-  const [data, setData] = useSessionStorage("PALS", "");
+  const contactsState = useContactsState();
+  const { data: userData, setData: setUserData } = useSessionStorage(
+    "PALS",
+    ""
+  );
+  const {
+    data: storedUserData,
+    setData: setStoredContactsData,
+  } = useSessionStorage("PALSDATA");
 
   useEffect(() => {
-    if (data) {
-      autoLoginAction(authDispatch, data);
+    if (userData) {
+      autoLoginAction(authDispatch, userData);
     }
   }, []);
 
   useEffect(() => {
-    setData(currentUser);
+    console.log("contacts changed");
+    setStoredContactsData(contactsState);
+  }, [contactsState]);
+
+  useEffect(() => {
+    setUserData(currentUser);
   }, [currentUser]);
 
   return (
@@ -30,7 +43,7 @@ const App = () => {
         {routes.map(
           ({ path, component: Component, needsAuth, title }, index) => (
             <Route key={index} exact path={path}>
-              {needsAuth && currentUser === null && data === null ? (
+              {needsAuth && currentUser === null && storedUserData === null ? (
                 <Redirect to="/signin" />
               ) : (
                 <RenderRoute Component={Component} title={title} />

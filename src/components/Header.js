@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useAuthDispatch, useAuthState, useContactsDispatch } from "../context";
 import { clearContactsAction, logoutAction } from "../context/actions";
 import authClearAction from "../context/actions/authActions/authClearAction";
+import { useSessionStorage } from "../custom-hooks";
 import { Clickable } from "./reusable-components";
 import SearchField from "./SearchField";
 import { ContactsNav, HeaderContainer } from "./styled-compoents";
@@ -14,9 +15,13 @@ const Header = () => {
   const authDispatch = useAuthDispatch();
   const contactsDispatch = useContactsDispatch();
   const history = useHistory();
+  const { clearData: clearStoredUser } = useSessionStorage("PALS");
+  const { clearData: clearStoredContactsData } = useSessionStorage("PALSDATA");
   const [showNav, setShowNav] = useState(false);
   const logout = () => {
     logoutAction(authDispatch, history);
+    clearStoredUser();
+    clearStoredContactsData();
     clearContactsAction(contactsDispatch);
     authClearAction(authDispatch);
   };
