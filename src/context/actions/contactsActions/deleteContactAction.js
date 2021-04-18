@@ -11,7 +11,7 @@ const deleteContactAction = async (dispatch, id, history) => {
     const res = await axiosInstance().delete(`/contacts/${id}`);
     if (res) {
       dispatch({ type: DELETE_CONTACT_SUCCESS, payload: res?.data });
-      history.push("/");
+      history.replace("/");
     }
   } catch (err) {
     dispatch({ type: DELETE_CONTACT_FAILURE, payload: err?.message });

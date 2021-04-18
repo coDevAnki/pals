@@ -22,7 +22,7 @@ const editContactAction = async (dispatch, id, editedData, history) => {
       let data = await res.data;
       dispatch({ type: EDIT_CONTACT_SUCCESS, payload: data });
       if (history) {
-        history.push("/");
+        history.replace("/");
       }
     } catch (err) {
       dispatch({

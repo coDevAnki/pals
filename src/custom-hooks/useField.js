@@ -13,16 +13,15 @@ const useField = ({
   const [value, setValue] = useState(initialValue);
   const [debounced] = useDebounce(value, debounceTime || 1000);
   const [field, setField] = useState({});
+  const metaRef = useRef();
+  const isFirstRender = useRef(true);
+  const isInputTouched = useRef(false);
   const [meta, setMeta] = useState({
     isValid: false,
     checking: false,
     error: null,
     message: null,
   });
-
-  const metaRef = useRef();
-  const isFirstRender = useRef(true);
-  const isInputTouched = useRef(false);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -31,6 +30,7 @@ const useField = ({
     }
     isInputTouched.current = true;
   }, [value]);
+
   useEffect(() => {
     if (realTimeValidation && !debounceTime) {
       runValidation(value);
