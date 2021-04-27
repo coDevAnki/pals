@@ -1,4 +1,4 @@
-import authReducer from "./authReducer/index";
-import contactsReducer from "./contactsReducer/index";
+import authReducer from "./authReducer";
+import contactsReducer from "./contactsReducer";
 
 export { authReducer, contactsReducer };
