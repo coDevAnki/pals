@@ -82,7 +82,7 @@ const RegisterForm = ({ onSubmit }) => {
           })
         }
       >
-        <FormHeader mb="2rem">Create New Contact</FormHeader>
+        <FormHeader mb="2rem">Create New Account</FormHeader>
         <FormInput
           label="User Name"
           id="username"
